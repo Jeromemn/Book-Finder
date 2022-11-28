@@ -22,10 +22,10 @@ This application was made to build a better understanding on Apollo Server and G
 ## Installation
 To install this application you can open via the live link to use the site or may clone this repository and make changes how you wish.
 
-[Book Finder](https://personal-note-book.herokuapp.com/)
+[Book Finder](https://peaceful-ocean-11868.herokuapp.com/)
 
 ## Usage
-To use this application in the browser visit the [Live Site]([https://personal-note-book.herokuapp.com/](https://peaceful-ocean-11868.herokuapp.com/saved)](https://peaceful-ocean-11868.herokuapp.com/)). There you may search for books, but if you would like to take advantage of all the application offers, create an account so you will be able to save books to your profile. 
+To use this application in the browser visit the [Live Site](https://peaceful-ocean-11868.herokuapp.com/). There you may search for books, but if you would like to take advantage of all the application offers, create an account so you will be able to save books to your profile. 
 
 To use this application as a clone, clone the app from github as you would any other app. Once Cloned use: npm i, once finished use: npm run develop and youre good to go.
 
