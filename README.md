@@ -29,10 +29,11 @@ To use this application in the browser visit the [Live Site](https://personal-no
 
 To use this application as a clone, clone the app from github as you would any other app. Once Cloned use: npm i, once finished use: npm run develop and youre good to go.
 
-<img src= "assets\ReadMe-terminal.jpg"></img>
-
-
 [Link to video](https://drive.google.com/file/d/1dVnzKua0zOuEF0Jm7O_5_evm2jZ9HRgQ/view)
+
+
+
+https://user-images.githubusercontent.com/112592440/204230065-f421526c-d0b2-4108-86cb-f198b012e613.mp4
 
     
 ## 
