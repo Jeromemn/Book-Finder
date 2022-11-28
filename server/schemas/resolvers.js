@@ -1,25 +1,20 @@
 const { AuthenticationError } = require("apollo-server-express");
-// const { saveBook } = require("../../client/src/utils/API");
-// const { sign } = require("jsonwebtoken");
-// const { login } = require("../controllers/user-controller");
-const { User, Book } = require("../models");
-// const { signToken } = require("../utils/auth");
+const { User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("books");
+        return await User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError("You need to log in first");
     },
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      // or {username, email, password }
-      const user = await User.create(args); // or username, email, password
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -40,31 +35,31 @@ const resolvers = {
 
       return { token, user };
     },
-    saveBook: async (parent, { userId, book }, context) => {
+    saveBook: async (parent, args, context) => {
       if (context.user) {
-        return User.findByIdAndUpdate(
-            { _id: userId },
-            {
-                $addToSet: { books: book },
-            },
-            {
-                new: true,
-                runValidators: true,
-            }
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: args } },
+          {
+            new: true,
+            runValidators: true,
+          }
         );
-        }
-      throw new AuthenticationError("You need to be logged in");
+        return updatedUser;
+      }
+      throw new AuthenticationError("Login before making changes");
     },
 
-    removeBook: async (parent, { book }, context) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: context.user_id },
-          { $pull: { books: book } },
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId: bookId } } },
           { new: true }
         );
+        return updatedUser;
       }
-      throw new AuthenticationError("You need to be logged in");
+      throw new AuthenticationError("Login before making changes");
     },
   },
 };
